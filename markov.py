@@ -1,7 +1,7 @@
 """Generate Markov text from text files."""
 
 from random import choice
-
+import twitter
 
 def open_and_read_file(file_path):
     """Take file path as string; return text as string.
@@ -81,7 +81,12 @@ def make_text(chains):
             random_value = choice(chains[key])
             key = (key[1], random_value)
             words.append(random_value)
-            
+    
+    while True:
+        if len(" ".join(words)) < 140:
+            return " ".join(words)
+        else:
+            words.pop()           
 
 
     return " ".join(words)
